@@ -14,5 +14,11 @@
     "d3": "^7.0.0",
     "express": "^4.17.1",
     "util": "^0.12.4"
+  },
+  "exports": {
+    "./src/index.js": {
+      "require": "./dist/d3.js",
+      "import": "./dist/d3.js"
+    }
   }
 }
