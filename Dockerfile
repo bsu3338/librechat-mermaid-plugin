@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy the package.json and package-lock.json files to the working directory
 COPY package*.json ./
 
+# Set environment variables
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
 # Install mermaid-cli globally
 RUN npm install -g @mermaid-js/mermaid-cli
 
