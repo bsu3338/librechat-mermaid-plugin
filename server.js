@@ -1,5 +1,6 @@
 const express = require('express');
-const { mermaidAPI } = require('mermaid');
+const mermaid = require('mermaid');
+const mermaidAPI = mermaid.mermaidAPI;
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const { promisify } = require('util');
