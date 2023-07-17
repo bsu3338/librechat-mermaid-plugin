@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
-mermaidAPI.initialize({ startOnLoad: false });
+mermaid.initialize({ startOnLoad: false });
 
 // Handle POST requests to /png endpoint
 app.post('/png', async (req, res) => {
@@ -19,7 +19,7 @@ app.post('/png', async (req, res) => {
     const { code, options } = req.body;
 
     // Generate the PNG using mermaid API with specified options
-    const pngBuffer = mermaidAPI.render(code, options);
+    const pngBuffer = mermaid.render(code, options);
 
     // Send the generated PNG as a response
     res.set('Content-Type', 'image/png');
@@ -36,7 +36,7 @@ app.post('/svg', async (req, res) => {
     const { code, options } = req.body;
 
     // Generate the SVG using mermaid API with specified options
-    const svgCode = mermaidAPI.render(code, options);
+    const svgCode = mermaid.render(code, options);
 
     // Send the generated SVG as a response
     res.set('Content-Type', 'image/svg+xml');
