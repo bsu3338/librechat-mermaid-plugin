@@ -7,11 +7,11 @@ WORKDIR /app
 # Copy the package.json and package-lock.json files to the working directory
 COPY package*.json ./
 
-# Install the project dependencies
-RUN npm install
-
 # Install mermaid-cli globally
 RUN npm install -g mermaid.cli
+
+# Install the project dependencies
+RUN npm install
 
 # Copy the application source code to the working directory
 COPY index.js .
