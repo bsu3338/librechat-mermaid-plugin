@@ -1,5 +1,5 @@
 const express = require('express');
-const mermaid = require('mermaid');
+const mermaid = import('mermaid');
 const mermaidAPI = mermaid.mermaidAPI;
 const bodyParser = require('body-parser');
 const fs = require('fs');
