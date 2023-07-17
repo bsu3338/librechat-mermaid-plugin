@@ -1,0 +1,17 @@
+{
+  "name": "librechat-mermaid-plugin",
+  "version": "1.0.0",
+  "description": "REST API web service for generating Mermaid diagrams as SVG or PNG images",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^8.13.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "util": "^0.12.4"
+  }
+}
