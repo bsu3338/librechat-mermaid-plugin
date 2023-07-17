@@ -1,10 +1,8 @@
-const express = require('express');
-const mermaid = require('mermaid');
-const mermaidAPI = mermaid.mermaidAPI;
-// const { mermaidAPI } = require('mermaid');
-const bodyParser = require('body-parser');
-const fs = require('fs');
-const { promisify } = require('util');
+import { mermaidAPI } from 'mermaid';
+import express from 'express';
+import bodyParser from 'body-parser';
+import fs from 'fs';
+import { promisify } from 'util';
 
 const writeFileAsync = promisify(fs.writeFile);
 const app = express();
