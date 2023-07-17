@@ -1,49 +1,57 @@
-import { mermaid } from 'mermaid';
 import express from 'express';
 import bodyParser from 'body-parser';
-import fs from 'fs';
-import { promisify } from 'util';
+import { exec } from 'child_process';
+import { writeFile, unlink } from 'fs/promises';
+import crypto from 'crypto';
 
-const writeFileAsync = promisify(fs.writeFile);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '1mb' }));
 
-mermaid.initialize({ startOnLoad: false });
+// Function to generate a unique file name
+const generateFileName = () => crypto.randomBytes(16).toString('hex');
+
+// Function to execute mermaid CLI and generate PNG
+const generateDiagram = (inputFile, outputFile) => new Promise((resolve, reject) => {
+  exec(`mmdc -i ${inputFile} -o ${outputFile}`, (error) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve();
+    }
+  });
+});
 
 // Handle POST requests to /png endpoint
 app.post('/png', async (req, res) => {
   try {
-    const { code, options } = req.body;
+    const { code } = req.body;
+    if (!code) {
+      return res.status(400).json({ error: 'Missing `code` in request body' });
+    }
+    
+    const fileName = generateFileName();
+    const inputFile = `/tmp/${fileName}.mmd`;
+    const outputFile = `/tmp/${fileName}.png`;
 
-    // Generate the PNG using mermaid API with specified options
-    const pngBuffer = mermaid.render(code, options);
+    // Write the code to an input file
+    await writeFile(inputFile, code);
 
-    // Send the generated PNG as a response
+    // Generate the PNG
+    await generateDiagram(inputFile, outputFile);
+
+    // Read the PNG file and send it as a response
+    const pngBuffer = await readFile(outputFile);
     res.set('Content-Type', 'image/png');
     res.send(pngBuffer);
+
+    // Clean up the temporary files
+    await Promise.all([unlink(inputFile), unlink(outputFile)]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'An error occurred' });
-  }
-});
-
-// Handle POST requests to /svg endpoint
-app.post('/svg', async (req, res) => {
-  try {
-    const { code, options } = req.body;
-
-    // Generate the SVG using mermaid API with specified options
-    const svgCode = mermaid.render(code, options);
-
-    // Send the generated SVG as a response
-    res.set('Content-Type', 'image/svg+xml');
-    res.send(svgCode);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'An error occurred' });
+    res.status(500).json({ error: err.message });
   }
 });
 
