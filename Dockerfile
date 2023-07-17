@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the application source code to the working directory
-COPY server.js .
+COPY index.js .
 
 # Copy the application source code to the working directory
 # COPY . .
