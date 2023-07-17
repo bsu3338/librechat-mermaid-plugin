@@ -1,7 +1,7 @@
 const express = require('express');
-// const mermaid = import('mermaid');
-// const mermaidAPI = mermaid.mermaidAPI;
-const { mermaidAPI } = require('mermaid');
+const mermaid = import('mermaid');
+const mermaidAPI = mermaid.mermaidAPI;
+// const { mermaidAPI } = require('mermaid');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const { promisify } = require('util');
@@ -12,6 +12,8 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
+
+mermaid.initialize({ startOnLoad: false });
 
 // Handle POST requests to /png endpoint
 app.post('/png', async (req, res) => {
