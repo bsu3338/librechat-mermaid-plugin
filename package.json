@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "REST API web service for generating Mermaid diagrams as SVG or PNG images",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js"
   },
