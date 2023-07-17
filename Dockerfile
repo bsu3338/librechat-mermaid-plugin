@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install mermaid-cli globally
-RUN npm install -g mermaid.cli
+RUN npm install -g @mermaid-js/mermaid-cli
 
 # Install the project dependencies
 RUN npm install
