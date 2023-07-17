@@ -11,7 +11,10 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the application source code to the working directory
-COPY . .
+COPY server.js .
+
+# Copy the application source code to the working directory
+# COPY . .
 
 # Expose the port specified by the environment variable
 ENV PORT=3000
