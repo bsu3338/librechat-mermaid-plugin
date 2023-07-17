@@ -8,7 +8,8 @@ WORKDIR /app
 COPY package*.json ./
 
 # Set environment variables
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+# ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+RUN npm install --ignore-scripts puppeteer
 
 # Install mermaid-cli globally
 RUN npm install -g @mermaid-js/mermaid-cli
