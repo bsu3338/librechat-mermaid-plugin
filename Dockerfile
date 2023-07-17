@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the application source code to the working directory
-COPY index.js .
+COPY index.cjs .
 
 # Copy the application source code to the working directory
 # COPY . .
@@ -21,4 +21,4 @@ ENV PORT=3000
 EXPOSE $PORT
 
 # Start the application
-CMD ["node", "index.js"]
+CMD ["node", "index.cjs"]
