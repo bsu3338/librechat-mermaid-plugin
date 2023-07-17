@@ -10,9 +10,8 @@
   "author": "Your Name",
   "license": "MIT",
   "dependencies": {
-    "mermaid": "^8.14.0",
+    "mermaid.cli": "^8.13.5",
     "body-parser": "^1.19.0",
-    "d3": "^7.0.0",
     "express": "^4.17.1",
     "util": "^0.12.4"
   }
