@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
-mermaid.initialize({ startOnLoad: false });
+mermaidAPI.initialize({ startOnLoad: false });
 
 // Handle POST requests to /png endpoint
 app.post('/png', async (req, res) => {
