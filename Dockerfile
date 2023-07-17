@@ -1,5 +1,5 @@
 # Use the official Node.js 14.x base image
-FROM node:14
+FROM node:18
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -9,7 +9,7 @@ COPY package*.json ./
 
 # Set environment variables
 # ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-RUN npm install --ignore-scripts puppeteer
+# RUN npm install --ignore-scripts puppeteer
 
 # Install mermaid-cli globally
 RUN npm install -g @mermaid-js/mermaid-cli
