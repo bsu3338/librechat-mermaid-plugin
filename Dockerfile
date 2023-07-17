@@ -10,6 +10,9 @@ COPY package*.json ./
 # Install the project dependencies
 RUN npm install
 
+# Install mermaid-cli globally
+RUN npm install -g mermaid.cli
+
 # Copy the application source code to the working directory
 COPY index.js .
 
