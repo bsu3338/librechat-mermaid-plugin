@@ -1,3 +1,4 @@
+# Used https://github.com/mermaid-js/mermaid-cli/blob/master/Dockerfile and files from that project for base design
 FROM node:alpine
 
 ENV CHROME_BIN="/usr/bin/chromium-browser" \
