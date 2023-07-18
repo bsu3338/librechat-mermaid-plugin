@@ -73,7 +73,7 @@ app.post('/svg', async (req, res) => {
     await writeFile(inputFile, code);
 
     // Generate the SVG
-    await generateSVG(inputFile, outputFile, format);
+    await generateDiagram(inputFile, outputFile, format);
 
     // Read the SVG file and send it as a response
     const svgBuffer = await readFile(outputFile);
