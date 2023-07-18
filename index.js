@@ -15,7 +15,7 @@ const generateFileName = () => crypto.randomBytes(16).toString('hex');
 
 // Function to execute mermaid CLI and generate diagram
 const generateDiagram = (inputFile, outputFile) => new Promise((resolve, reject) => {
-  exec(`/home/mermaidcli/node_modules/.bin/mmdc -i ${inputFile} -o ${outputFile}`, (error) => {
+  exec(`/home/mermaidcli/node_modules/.bin/mmdc -p /puppeteer-config.json -i ${inputFile} -o ${outputFile}`, (error) => {
     if (error) {
       reject(error);
     } else {
