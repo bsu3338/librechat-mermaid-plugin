@@ -1,0 +1,59 @@
+openapi: 3.0.1
+info:
+  title: Mermaid Plugin
+  description: A plugin that allows the user to create and manage a TODO list using ChatGPT.
+  version: 'v1'
+servers:
+  - url: http://localhost:3000
+paths:
+  /png:
+    operationId: generatePngDiagram
+    summary: Generate a PNG diagram
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: The Mermaid code for the diagram
+    responses:
+      '200':
+        description: OK
+        content:
+          image/png:
+            schema:
+              $ref: '#/components/schemas/getPNGResponse'
+              
+  /svg:
+    operationId: generateSvgDiagram
+    summary: Generate an SVG diagram
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                description: The Mermaid code for the diagram
+    responses:
+      '200':
+        description: OK
+        content:
+          image/svg+xml:
+            schema:
+              $ref: '#/components/schemas/getSVGResponse'
+
+components:
+  schemas:
+    getPngResponse:
+      type: string
+      format: binary
+    getSVGResponse:
+      type: string
+      format: binary
+         
