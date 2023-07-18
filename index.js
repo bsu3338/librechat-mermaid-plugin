@@ -13,9 +13,9 @@ app.use(bodyParser.json({ limit: '1mb' }));
 // Function to generate a unique file name
 const generateFileName = () => crypto.randomBytes(16).toString('hex');
 
-// Function to execute mermaid CLI and generate PNG
-const generateDiagram = (inputFile, outputFile) => new Promise((resolve, reject) => {
-  exec(`/home/mermaidcli/node_modules/.bin/mmdc -p /puppeteer-config.json -i ${inputFile} -o ${outputFile}`, (error) => {
+// Function to execute mermaid CLI and generate diagram
+const generateDiagram = (inputFile, outputFile, format) => new Promise((resolve, reject) => {
+  exec(`/home/mermaidcli/node_modules/.bin/mmdc -i ${inputFile} -o ${outputFile} -b transparent -${format}`, (error) => {
     if (error) {
       reject(error);
     } else {
@@ -23,6 +23,7 @@ const generateDiagram = (inputFile, outputFile) => new Promise((resolve, reject)
     }
   });
 });
+
 
 // Handle POST requests to /png endpoint
 app.post('/png', async (req, res) => {
@@ -35,12 +36,13 @@ app.post('/png', async (req, res) => {
     const fileName = generateFileName();
     const inputFile = `/tmp/${fileName}.mmd`;
     const outputFile = `/tmp/${fileName}.png`;
+    const format = 'png';
 
     // Write the code to an input file
     await writeFile(inputFile, code);
 
     // Generate the PNG
-    await generateDiagram(inputFile, outputFile);
+    await generateDiagram(inputFile, outputFile, format);
 
     // Read the PNG file and send it as a response
     const pngBuffer = await readFile(outputFile);
@@ -65,12 +67,13 @@ app.post('/svg', async (req, res) => {
     const fileName = generateFileName();
     const inputFile = `/tmp/${fileName}.mmd`;
     const outputFile = `/tmp/${fileName}.svg`;
+    const format = 'svg';
 
     // Write the code to an input file
     await writeFile(inputFile, code);
 
     // Generate the SVG
-    await generateSVG(inputFile, outputFile);
+    await generateSVG(inputFile, outputFile, format);
 
     // Read the SVG file and send it as a response
     const svgBuffer = await readFile(outputFile);
