@@ -29,7 +29,7 @@ RUN npm install
 COPY index.js .
 
 # Copy the openapi.yaml file to the public folder
-COPY openai.yaml /app/public/openapi.yaml
+COPY openapi.yaml /app/public/openapi.yaml
 
 # Expose the port specified by the environment variable
 ENV PORT=3000
