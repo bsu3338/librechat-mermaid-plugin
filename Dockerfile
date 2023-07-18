@@ -28,7 +28,8 @@ RUN npm install
 # Copy the application source code to the working directory
 COPY index.js .
 
-# WORKDIR /data
+# Copy the openapi.yaml file to the public folder
+COPY openapi.yaml /app/public/openapi.yaml
 
 # Expose the port specified by the environment variable
 ENV PORT=3000
