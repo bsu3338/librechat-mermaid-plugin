@@ -31,6 +31,9 @@ COPY index.js .
 # Copy the openapi.yaml file to the public folder
 COPY openapi.yaml /app/public/openapi.yaml
 
+# Copy the logo.svg file to the public folder
+COPY logo.svg /app/public/logo.svg
+
 # Expose the port specified by the environment variable
 ENV PORT=3000
 EXPOSE $PORT
