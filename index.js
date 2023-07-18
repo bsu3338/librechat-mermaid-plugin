@@ -41,7 +41,7 @@ app.post('/png', async (req, res) => {
     await writeFile(inputFile, code);
 
     // Generate the PNG
-    await generateDiagram(inputFile, outputFile, format);
+    await generateDiagram(inputFile, outputFile);
 
     // Read the PNG file and send it as a response
     const pngBuffer = await readFile(outputFile);
@@ -71,7 +71,7 @@ app.post('/svg', async (req, res) => {
     await writeFile(inputFile, code);
 
     // Generate the SVG
-    await generateDiagram(inputFile, outputFile, format);
+    await generateDiagram(inputFile, outputFile);
 
     // Read the SVG file and send it as a response
     const svgBuffer = await readFile(outputFile);
