@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware to parse JSON bodies
 app.use(bodyParser.json({ limit: '1mb' }));
 
+// host the openai.yaml file and logo
 app.use(express.static('public'));
 
 // Function to generate a unique file name
