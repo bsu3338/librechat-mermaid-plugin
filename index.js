@@ -24,6 +24,26 @@ const generateDiagram = (inputFile, outputFile) => new Promise((resolve, reject)
   });
 });
 
+app.get('/.well-known/ai-plugin.json', (req, res) => {
+  const pluginInfo = {
+    schema_version: 'v1',
+    name_for_human: 'Mermaid Plugin',
+    name_for_model: 'mermaid-plugin',
+    description_for_human: 'Create images using the mermaid diagram code.',
+    description_for_model: 'Help the user with creating diagrams based off the mermaid syntax. You can create diagrams based on provided mermaid code.',
+    auth: {
+      type: 'none'
+    },
+    api: {
+      type: 'openapi',
+      url: 'http://localhost:${PORT}/openapi.yaml'
+    },
+    logo_url: 'http://localhost:${PORT}/logo.png',
+    contact_email: 'support@example.com',
+    legal_info_url: 'http://www.example.com/legal'
+  };
+  res.json(pluginInfo);
+});
 
 // Handle POST requests to /png endpoint
 app.post('/png', async (req, res) => {
