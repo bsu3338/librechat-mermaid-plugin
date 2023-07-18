@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 3000;
 // Middleware to parse JSON bodies
 app.use(bodyParser.json({ limit: '1mb' }));
 
+app.use(express.static('public'));
+
 // Function to generate a unique file name
 const generateFileName = () => crypto.randomBytes(16).toString('hex');
 
