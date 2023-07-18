@@ -36,9 +36,9 @@ app.get('/.well-known/ai-plugin.json', (req, res) => {
     },
     api: {
       type: 'openapi',
-      url: 'http://localhost:${PORT}/openapi.yaml'
+      url: `http://localhost:${PORT}/openapi.yaml`
     },
-    logo_url: 'http://localhost:${PORT}/logo.png',
+    logo_url: `http://localhost:${PORT}/logo.png`,
     contact_email: 'support@example.com',
     legal_info_url: 'http://www.example.com/legal'
   };
