@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Mermaid Plugin
-  description: A plugin that allows the user to create and manage a TODO list using ChatGPT.
+  description: A plugin that helps the user with creating diagrams based off the mermaid syntax.
   version: 'v1'
 servers:
   - url: http://localhost:3000
