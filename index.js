@@ -14,8 +14,8 @@ app.use(bodyParser.json({ limit: '1mb' }));
 const generateFileName = () => crypto.randomBytes(16).toString('hex');
 
 // Function to execute mermaid CLI and generate diagram
-const generateDiagram = (inputFile, outputFile, format) => new Promise((resolve, reject) => {
-  exec(`/home/mermaidcli/node_modules/.bin/mmdc -i ${inputFile} -o ${outputFile} -b transparent -${format}`, (error) => {
+const generateDiagram = (inputFile, outputFile) => new Promise((resolve, reject) => {
+  exec(`/home/mermaidcli/node_modules/.bin/mmdc -i ${inputFile} -o ${outputFile}`, (error) => {
     if (error) {
       reject(error);
     } else {
@@ -36,7 +36,6 @@ app.post('/png', async (req, res) => {
     const fileName = generateFileName();
     const inputFile = `/tmp/${fileName}.mmd`;
     const outputFile = `/tmp/${fileName}.png`;
-    const format = 'png';
 
     // Write the code to an input file
     await writeFile(inputFile, code);
@@ -67,7 +66,6 @@ app.post('/svg', async (req, res) => {
     const fileName = generateFileName();
     const inputFile = `/tmp/${fileName}.mmd`;
     const outputFile = `/tmp/${fileName}.svg`;
-    const format = 'svg';
 
     // Write the code to an input file
     await writeFile(inputFile, code);
