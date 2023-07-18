@@ -26,3 +26,9 @@ curl -X POST -H "Content-Type: application/json" -d '{
   "code": "graph LR\n  A-->B;\n  B-->C;"
 }' http://localhost:3000/svg -o output.svg
 ```
+
+### Wellknown Test
+
+``` bash
+curl http://localhost:3333/.well-known/ai-plugin.json
+```
