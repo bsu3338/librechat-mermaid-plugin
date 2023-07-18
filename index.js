@@ -55,6 +55,37 @@ app.post('/png', async (req, res) => {
   }
 });
 
+app.post('/svg', async (req, res) => {
+  try {
+    const { code } = req.body;
+    if (!code) {
+      return res.status(400).json({ error: 'Missing `code` in request body' });
+    }
+    
+    const fileName = generateFileName();
+    const inputFile = `/tmp/${fileName}.mmd`;
+    const outputFile = `/tmp/${fileName}.svg`;
+
+    // Write the code to an input file
+    await writeFile(inputFile, code);
+
+    // Generate the SVG
+    await generateSVG(inputFile, outputFile);
+
+    // Read the SVG file and send it as a response
+    const svgBuffer = await readFile(outputFile);
+    res.set('Content-Type', 'image/svg+xml');
+    res.send(svgBuffer);
+
+    // Clean up the temporary files
+    await Promise.all([unlink(inputFile), unlink(outputFile)]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
